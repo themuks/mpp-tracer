@@ -7,13 +7,13 @@ namespace mpp_tracer
 {
     public class JsonSerializerImpl : ISerializer
     {
-        public byte[] Serialize(object o)
+        public byte[] Serialize(TracingThread[] threads)
         {
             JsonSerializerOptions serializerOptions = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
-            string serializedData = JsonSerializer.Serialize(o, serializerOptions);
+            string serializedData = JsonSerializer.Serialize(threads, serializerOptions);
             return Encoding.UTF8.GetBytes(serializedData);
         }
     }

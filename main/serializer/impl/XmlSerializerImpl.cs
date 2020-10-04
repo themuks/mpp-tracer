@@ -7,9 +7,9 @@ namespace mpp_tracer
 {
     public class XmlSerializer : ISerializer
     {
-        public byte[] Serialize(object o)
+        public byte[] Serialize(TracingThread[] threads)
         {
-            DataContractSerializer serializer = new DataContractSerializer(typeof(object));
+            DataContractSerializer serializer = new DataContractSerializer(typeof(TracingThread[]));
             XmlWriterSettings xmlWriterSettings = new XmlWriterSettings()
             {
                 Indent = true
@@ -17,7 +17,7 @@ namespace mpp_tracer
             MemoryStream memoryStream = new MemoryStream();
             using (XmlWriter xmlWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
-                serializer.WriteObject(xmlWriter, o);
+                serializer.WriteObject(xmlWriter, threads);
             }
             return memoryStream.GetBuffer();
         }
